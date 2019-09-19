@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Threading;
 
-namespace Calculator
+namespace Operation
 {
     public class Program
     {
@@ -14,7 +14,7 @@ namespace Calculator
         static void Main(string[] args)
         {
             int n;
-            Console.WriteLine("请输入练习题数量：");
+            Console.WriteLine("请输入数量：");
             n = Convert.ToInt32(Console.ReadLine());
             GetSubject(n);
         }
