@@ -92,7 +92,7 @@ namespace Calculator
                 Console .WriteLine(subject);
             }
             
-            Console.WriteLine("已将算式写入:" );
+            Console.WriteLine("已輸出" );
             Console.ReadLine();
         }
     }
