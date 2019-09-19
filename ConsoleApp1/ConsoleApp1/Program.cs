@@ -3,45 +3,97 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Threading;
 
-namespace ConsoleApp1
+namespace Calculator
 {
-    class Program
+    public class Program
     {
+       
         static void Main(string[] args)
         {
-            mathvoid op = new mathvoid();
-            string Z = "";
-            do
+            int n;
+            Console.WriteLine("请输入练习题数量：");
+            n = Convert.ToInt32(Console.ReadLine());
+            GetSubject(n);
+        }
+
+        static public void GetSubject(int n)
+        {
+          
+            Random rdm = new Random();
+            int[] num = new int[4];
+            char[] ch = new char[3];
+            for (int i = 0; i < n; i++)
             {
-                Console.WriteLine("-------------------------------四则运算-------------------------");
-                Console.WriteLine("");
-                Console.WriteLine("请选择您使用的运算方法:1.加法 2.减法 3.乘法 4.除法 5.退出！");
-                Z = Console.ReadLine();
-                switch (Z)
+                int cnum = rdm.Next(2, 4);       //运算符个数
+                num[cnum] = rdm.Next(101);
+                double resultTest = num[0];     //用于检查结果是否为整数
+                long result = num[0];
+                string subject = num[0].ToString();  //代表算式的字符串
+                for (int m = 0; m < cnum; m++)
                 {
-                    case "1":
-                        op.mathjia();
+                    num[m] = rdm.Next(101);
+                    int r = rdm.Next(4);
+                    switch (r)
+                    {
+                        case 0:
+                            ch[m] = '+'; break;
+                        case 1:
+                            ch[m] = '-'; break;
+                        case 2:
+                            ch[m] = '*'; break;
+                        case 3:
+                            ch[m] = '/'; break;
+                        default:
+                            break;
+                    }
+                    if (ch[m] == '/' && num[m] == 0)
+                    {
+                        m--;
                         continue;
-                    case "2":
-                        op.mathjian();
+                    }
+                    switch (ch[m])
+                    {
+                        case '+':
+                            resultTest = resultTest + (double)num[m]; break;
+                        case '-':
+                            resultTest = resultTest - (double)num[m]; break;
+                        case '*':
+                            resultTest = resultTest * (double)num[m]; break;
+                        case '/':
+                            resultTest = resultTest / (double)num[m]; break;
+                        default:
+                            break;
+                    }
+                    //检验resulttest是否为整数，若不是，重新循环。
+                    if (resultTest != Convert.ToDouble(Convert.ToInt64(resultTest)))
+                    {
+                        m--;
                         continue;
-                    case "3":
-                        op.mathcheng();
-                        continue;
-                    case "4":
-                        op.mathchu();
-                        continue;
-                    case "5":
-                        op.result();
-                        break;
-                    default:
-                        Console.WriteLine("输入无效！");
-                        continue;
+                    }
+                    switch (ch[m])
+                    {
+                        case '+':
+                            result = result + num[m]; break;
+                        case '-':
+                            result = result - num[m]; break;
+                        case '*':
+                            result = result * num[m]; break;
+                        case '/':
+                            result = result / num[m]; break;
+                        default:
+                            break;
+                    }
+                    subject += ch[m] + num[m].ToString();
                 }
-                break;
+                subject += "=" + result.ToString();
+                Console .WriteLine(subject);
             }
-            while (true);
+            
+            Console.WriteLine("已将算式写入:" );
+            Console.ReadLine();
         }
     }
 }

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace ConsoleApp1
 {
-    class mathvoid
+    internal class mathvoid
     {
         public static int right = 0;                          //记录答对的总数！
         public static int wrong = 0;                          //记录答错的总数！
